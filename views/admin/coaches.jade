@@ -1,0 +1,29 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/coachesController.js')
+    script(src='/js/services/adminCoachService.js')
+    div.container(ng-controller='CoachesController')
+        .row
+            h1 Listado de instructores
+            a(href='/admin/coach')
+                button.btn.btn-default(type='button') Agregar instructor
+
+            table.table
+                thead
+                    tr
+                        th Instructor
+                        th Imagen
+                        th Acción
+                tbody
+                    tr(ng-repeat='coach in coaches')
+                        td
+                            label {{coach.name}}
+                        td
+                            image(ng-src='{{coach.image.url}}')
+                        td
+                            a(ng-href='/admin/coach?coachID={{coach._id}}')
+                                button.btn.btn-default(type='button', aria-label='Left Align')
+                                    span.glyphicon.glyphicon-pencil(aria-hidden='true')
+                            a(href='#')
+                                button.btn.btn-default(type='button', aria-label='Left Align', ng-click="removeCoach(coach._id)")
+                                    span.glyphicon.glyphicon-remove(aria-hidden='true')

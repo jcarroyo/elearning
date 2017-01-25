@@ -1,0 +1,24 @@
+extends layout
+block content
+    script(src='/js/controllers/students/StudentSignUpController.js')
+    script(src='/js/services/studentAccountService.js')
+    div(ng-controller='StudentSignUpController')
+        form(ng-submit="createAccount()").form-signin
+            h2.form-signin-heading Nueva cuenta
+
+            label.sr-only(for='inputName') Nombre
+            input#inputName.form-control(type='text', placeholder='Nombre', required autofocus='', ng-model='account.user')
+
+            label.sr-only(for='inputEmail') Correo
+            input#inputEmail.form-control(type='email', placeholder='Correo', required, ng-model='account.email')
+
+            label.sr-only(for='inputPassword') Password
+            input#inputPassword.form-control(type='password', placeholder='Password', required, ng-model='account.password')
+
+            label.sr-only(for='inputPassword') RepeatPassword
+            input#inputRepeatPassword.form-control(type='password', placeholder='Repetir password', required, ng-model='account.passwordRepeat')
+
+            button.btn.btn-lg.btn-primary.btn-block(type='submit', ng-disabled='!createActive') Crear cuenta
+            a(href='#', data-toggle="modal", data-target="#login-modal")
+                | ¿Ya tienes una cuenta? Inicia sesión
+

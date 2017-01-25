@@ -1,0 +1,75 @@
+doctype html
+html(lang='es', ng-app='learningApp')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='')
+        meta(name='author', content='')
+        ///link(rel='icon', href='#{pathToAssets}/docs/favicon.ico')
+        title LearningPortal - Admin
+        // Bootstrap core CSS
+        link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', rel='stylesheet')
+        // Custom styles for this template
+        link(href='/css/starter-template.css', rel='stylesheet')
+
+        script(src='/js/global.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+        script(src='http://underscorejs.org/underscore-min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js')
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js')
+        script(src='/js/app.js')
+        script(src='/js/interceptors/authInterceptor.js')
+        script(src='/js/modules/userModule.js')
+        script(src='/js/controllers/controller.js')
+        script(src='/js/services/service.js')
+        script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+        script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+        ///TEXT ANGULAR
+        link(href='http://textangular.com/dist/textAngular.css', rel="stylesheet")
+        link(href='http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', rel="stylesheet")
+        link(href='http://fonts.googleapis.com/css?family=Roboto:400,300', rel="stylesheet")
+        script(src='http://textangular.com/dist/textAngular-rangy.min.js')
+        script(src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.4.6/textAngular-sanitize.min.js')
+        script(src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.4.6/textAngular.min.js')
+
+        //Notifications
+        script(src='/js/modules/angular-ui-notification.min.js')
+        link(href='/css/angular-ui-notification.min.css', rel='stylesheet')
+
+        //Loading bar
+        link(href='/libs/angular-loading-bar/build/loading-bar.min.css', rel='stylesheet')
+        script(src='/libs/angular-loading-bar/build/loading-bar.min.js')
+
+    body
+        .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+            .container
+                .navbar-header
+                    button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='#') LearningPortal - Admin
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href='/admin') Inicio
+                        li
+                            a(href='/admin/courses') Cursos
+                        li
+                            a(href='/admin/coaches') Profesores
+                        li
+                            a(href='/admin/students') Alumnos
+                        li
+                            a(href='/admin/logs') Logs
+                        li
+                            a(href='/admin/logout') Logout
+                // /.nav-collapse
+        .container
+            block content
+        // /.container
+        // Bootstrap core JavaScript
+        // ==================================================
+        // Placed at the end of the document so the pages load faster

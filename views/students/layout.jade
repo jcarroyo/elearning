@@ -1,0 +1,103 @@
+doctype html
+html(lang='en', ng-app='learningApp')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='')
+        meta(name='author', content='José Arroyo')
+        ///link(rel='icon', href='#{pathToAssets}/docs/favicon.ico')
+        title Adhouse-LearningPortal
+        // Bootstrap core CSS
+        link(href='/libs/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+        // Custom styles for this template
+        link(href='/css/starter-template.css', rel='stylesheet')
+
+        script(src='/js/global.js')
+        script(src='/libs/jquery/dist/jquery.min.js')
+        script(src='/libs/underscore/underscore-min.js')
+        script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
+
+        script(src='/libs/angular/angular.min.js')
+
+        script(src='/libs/angular-animate/angular-animate.min.js')
+        script(src='/js/app.js')
+        script(src='/js/interceptors/authInterceptor.js')
+        script(src='/js/modules/userModule.js')
+        script(src='/js/controllers/controller.js')
+        script(src='/js/services/service.js')
+        script(src='/js/controllers/students/studentMainController.js')
+
+
+        script(src='/libs/html5shiv/dist/html5shiv.js')
+
+        script(src='/libs/respond/dest//respond.min.js')
+        ///TEXT ANGULAR
+        link(href='/libs/textAngular/dist/textAngular.css', rel="stylesheet")
+        link(href='/libs/font-awesome/css/font-awesome.min.css', rel="stylesheet")
+        script(src='/libs/textAngular/dist/textAngular-rangy.min.js')
+        script(src='/libs/textAngular/dist/textAngular-sanitize.min.js')
+        script(src='/libs/textAngular/dist/textAngular.min.js')
+
+        //Notifications
+        script(src='/js/modules/angular-ui-notification.min.js')
+        link(href='/css/angular-ui-notification.min.css', rel='stylesheet')
+
+        //Loading bar
+        link(href='/libs/angular-loading-bar/build/loading-bar.min.css', rel='stylesheet')
+        script(src='/libs/angular-loading-bar/build/loading-bar.min.js')
+
+        link(href='/css/loginModal.css', rel='stylesheet')
+
+        script(src='/js/controllers/students/studentLoginController.js')
+        script(src='/js/services/studentAccountService.js')
+
+
+    body(ng-controller='StudentMainController')
+        .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+            .container
+                .navbar-header
+                    button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='/') Adhouse-LearningPortal
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href='/') Inicio
+                        li
+                            a(href='/catalog') Catálogo
+                        li
+                            a(href='/about') Acerca de
+                        li
+                            a(ng-if='isUserLogged()', ng-click="logOut()" href='/') Logout
+                            a(ng-if='!isUserLogged()', href='#', data-toggle="modal", data-target="#login-modal") Login
+                    ul.nav.navbar-nav.navbar-right(ng-if='isUserLogged()')
+                        li
+                            a(href='/me') {{getStudentName()}}
+                // /.nav-collapse
+        .container
+            block content
+
+        #login-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true', style='display: none;')
+            .modal-dialog
+                .loginmodal-container
+                    h1 Iniciar sesión
+                    br
+                    form(ng-controller='StudentLoginController', ng-keypress="pressKey($event)")
+                        input(type='email', placeholder='Correo', autofocus='', ng-model='account.email')
+                        input(type='password', placeholder='Password', ng-model='account.password')
+                        input.login.loginmodal-submit(type='button', value='Login', ng-click="login()")
+                    .login-help
+                        a(href='/signup') Registrar cuenta
+                        |  -
+                        a(href='#') Olvidé mi contraseña
+
+
+
+            // /.container
+        // Bootstrap core JavaScript
+        // ==================================================
+        // Placed at the end of the document so the pages load faster

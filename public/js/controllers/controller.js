@@ -1,0 +1,1 @@
+angular.module('learningController', ['learningService', 'textAngular', 'ui-notification']);

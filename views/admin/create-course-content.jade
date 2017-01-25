@@ -1,0 +1,57 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/courseContentCreationController.js')
+    script(src='/js/controllers/admin/courseMaterialController.js')
+    script(src='/js/services/adminCoursesService.js')
+    div.container
+        h2 Curso: {{course.title}}
+        ul.nav.nav-tabs
+            li.active
+                a(data-toggle='tab', href='#lessonsTab') Lecciones
+            li
+                a(data-toggle='tab', href='#materialTab') Material
+
+        div.tab-content
+            div#lessonsTab.tab-pane.fade.in.active(ng-controller='CourseContentController')
+                div(ng-repeat='s in sections')
+                    label Sección - {{s.title}}
+                    button.btn.btn-default(type='button', aria-label='Left Align', ng-click='editSection(s)')
+                        span.glyphicon.glyphicon-pencil(aria-hidden='true')
+                    button.btn.btn-default(type='button', aria-label='Left Align', ng-click='removeSection(s)')
+                        span.glyphicon.glyphicon-remove(aria-hidden='true')
+
+
+                    div(ng-repeat='l in s.lessons')
+                        label Lección - {{l.title}}
+                        button.btn.btn-default(type='button', aria-label='Left Align', ng-click='editLesson(l)')
+                            span.glyphicon.glyphicon-pencil(aria-hidden='true')
+                        button.btn.btn-default(type='button', aria-label='Left Align', ng-click='removeLesson(s, l)')
+                            span.glyphicon.glyphicon-remove(aria-hidden='true')
+
+                form#formContent(method='post', action='https://api.sproutvideo.com/v1/videos', enctype='multipart/form-data')
+                    label Agregar
+                    select.form-control(ng-model='content.selectedType')
+                        option(value='section') Sección
+                        option(value='lesson') Lección
+
+                    label Título
+                    input.form-control(type="text", ng-model="content.title")
+
+                    div(ng-show='content.selectedType == "lesson"')
+                        label Seleccione la sección
+                        select.form-control(ng-model='content.selectedSection', ng-options='item.title for item in sections')
+                        label Video
+                        input.form-control(type='file', name='source_video')
+                        input(type='text', ng-model='content.token', name='token', style='display:none')
+                        input(type='text', value="0", name='privacy', style='display:none')
+
+                    div(ng-hide='editionActive')
+                        button.btn.btn-primary(type='button', ng-click="addContent(content.selectedType)") Agregar
+                    div(ng-show='editionActive')
+                        button.btn.btn-primary(type='button', ng-click="updateContent(content.selectedType)") Editar
+                        button.btn.btn-danger(type='button', ng-click="cancelEdit()") Cancelar
+            div#materialTab.tab-pane.fade(ng-controller='CourseMaterialController')
+                h2 aaa
+
+
+

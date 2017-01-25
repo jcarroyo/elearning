@@ -1,0 +1,44 @@
+{
+  "studentSignUpController": "elearning",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "./node_modules/.bin/jasmine-node spec"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "cookie-parser": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "jade": "latest",
+    "morgan": "latest",
+    "serve-favicon": "latest",
+    "querystring": "latest",
+	"random-js": "latest",
+	"q": "latest",
+	"sha1": "latest",
+    "mongodb": "latest",
+    "mongoose": "latest",
+    "request-promise": "latest",
+    "paypal-rest-sdk": "latest",
+    "nconf": "latest",
+    "jsonwebtoken": "latest",
+    "express-jwt": "latest",
+    "uuid": "latest",
+    "node-cache": "latest",
+    "async": "latest",
+    "bower": "latest",
+    "cloudinary": "latest",
+    "multer": "latest",
+    "nodemailer": "latest",
+    "express-mongo-sanitize": "latest",
+    "winston": "latest",
+    "winston-mongodb": "latest"
+  },
+  "devDependencies": {
+    "jasmine": "latest",
+    "jasmine-node": "latest"
+
+  }
+}

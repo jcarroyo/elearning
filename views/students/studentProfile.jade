@@ -1,0 +1,43 @@
+extends layout
+block content
+    link(href='css/shop-homepage.css', rel='stylesheet')
+    script(src='/js/controllers/students/studentProfileController.js')
+    script(src='/js/services/studentAccountService.js')
+    div.container(ng-controller='StudentProfileController')
+        ul.nav.nav-tabs
+            li.active
+                a(data-toggle='tab', href='#profileTab') Perfil
+            li
+                a(data-toggle='tab', href='#coursesTab') Cursos
+            li
+                a(data-toggle='tab', href='#passwordTab') Contraseña
+
+        div.tab-content
+            div#profileTab.tab-pane.fade.in.active
+                h3 Perfil
+                form
+                    label(for='inputName') Nombre
+                    input#inputName.form-control(type='text', ng-model='account.user')
+                    label(for='') Correo
+                    input#inputEmail.form-control(type='text', ng-model='account.email', readonly)
+                    button.btn.btn-lg.btn-primary.btn-block(type='button' ng-click='updateUserProfile()') Actualizar datos
+            div#coursesTab.tab-pane.fade
+                h3 Mis cursos
+                table.table.table-striped
+                    thead
+                        th Curso
+                        th Fecha inscripción
+                    tr(ng-repeat='course in courses')
+                        td
+                            a(href='/course/{{course.friendlyUrlName}}') {{course.courseTitle}}
+                        td {{course.enrolledDate}}
+            div#passwordTab.tab-pane.fade
+                h3 Cambiar contraseña
+                form
+                    label(for='') Contraseña actual
+                    input#inputPassword.form-control(type='password', ng-model='changePassword.current')
+                    label(for='') Contraseña nueva
+                    input#inputPassword.form-control(type='password', ng-model='changePassword.new')
+                    label(for='') Contraseña repetir nueva
+                    input#inputPassword.form-control(type='password', ng-model='changePassword.newRepeat')
+                    button.btn.btn-lg.btn-primary.btn-block(type='button' ng-click='changePassword()') Cambiar contraseña

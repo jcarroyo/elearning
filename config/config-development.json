@@ -1,0 +1,100 @@
+{
+  "web": {
+    "port": 80,
+    "session": {
+      "secret": "MN8kFi8DdlQVDABqolp5",
+      "unset": "destroy",
+      "resave": true,
+      "saveUninitialized": false
+    },
+    "tempImagesUploadFolder": "./tmpUploads/",
+    "imageMaxFileSizeBytes": 100000
+  },
+  "paging": {
+    "pageSize": 20,
+    "maxPage": 10000
+  },
+  "api": {
+
+  },
+  "paypal":{
+    "mode": "sandbox",
+    "client_id": "AQoDGb4Gv5cnkTCIYu16tEiqEUbYIJp9OqI2V4j-ii-2dwFd-LdijmVier1Or_0ENsNqprKSp4btDm-N",
+    "client_secret": "ENOwrsaefuElbDiTiVht3qe4TbL9cQpcc_k_AB4gwZPsUflElo1A0eGu0eu3p1clDqaxvTAGfK3d5_No",
+    "profile": {
+      "brand_name": "AdHouse",
+      "logo_image": "http://www.techouse.com.pe/images/techouse.png",
+      "locale_code": "US"
+    },
+    "payment": {
+      "return_url": "http://www.techouse.com.pe/accept-payment",
+      "cancel_url": "http://www.techouse.com.pe/cancel-payment"
+    }
+  },
+  "mongodb":{
+    "security": true,
+    "user": "",
+    "password": "",
+    "uri": "mongodb://127.0.0.1/elearning"
+  },
+  "cloudinary": {
+    "cloud_name": "djdibxrzc",
+    "api_key": "351383859485299",
+    "api_secret": "GBAPdvUpLYRkkqhgno9TxFXljrI"
+  },
+  "sproutvideo": {
+    "email": "maripo@yhg.biz",
+    "apiUrl": "https://api.sproutvideo.com",
+    "apiVersion": "/v1",
+    "apiKey": "91220a716581a4f3a608704f37ea7031"
+  },
+  "security": {
+    "algorithm": "sha512",
+    "secretKey": "qjKgEzx9K25kHukM2Dst",
+    "digest": "hex"
+  },
+  "jwt": {
+    "secret": "Cd8oMEYAR6GfrUpyEQF1",
+    "expiresIn": 10800
+  },
+  "uuidVector": [
+    16,
+    145,
+    86,
+    190,
+    196,
+    251,
+    65,
+    234,
+    177,
+    180,
+    239,
+    225,
+    103,
+    28,
+    88,
+    54
+  ],
+  "email":{
+    "service": "gmail",
+    "auth": {
+      "user": "jc.arroyo10@gmail.com",
+      "pass": "yknxuyhmsigojaun"
+    }
+  },
+  "emailTemplate": {
+    "senderAddress": "José Arroyo ✔ <jc.arroyo10@gmail.com>",
+    "activateAccount": {
+      "urlActivation": "http://www.techouse.com.pe/account/student/activateAccount?ac={0}",
+      "HTMLTemplate":
+        "<h2>{0} gracias por inscribirte en Adhouse-learningPortal!</h2><p>Estás a un paso de poder acceder a los diversos contenidos con los que contamos, sólo es necesario que actives tu cuenta desde el siguiente enlace:</p><a href='{1}'>activación</a>",
+      "PlainTextTemplate": "{0} Gracias por inscribirte en Adhouse-learningPortal!\nEstás a un paso de poder acceder a los diversos contenidos con los que contamos, sólo es necesario que actives tu cuenta desde el siguiente enlace:\n{1}",
+      "subject": "Adhouse-LearningPortal: Activate Account"
+    },
+    "purchaseConfirmation": {
+      "HTMLTemplate": "<h2>{0}, gracias por adquirir el curso de {1}</h2><img src='{2}' alt='{3}' /><br />Puedes acceder a el mediante el siguiente enlace <a href='http://www.techouse.com.pe/course/{4}'>{5}</a>",
+      "PlainTextTemplate": "{0}, gracias por adquirir el curso de {1}",
+      "subject": "Adhouse-LearningPortal: Course purchase"
+    }
+  }
+}

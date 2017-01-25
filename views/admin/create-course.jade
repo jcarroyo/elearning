@@ -1,0 +1,39 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/courseCreationController.js')
+    script(src='/js/services/adminCoursesService.js')
+    script(src='/js/services/adminCoachService.js')
+    div.container(ng-controller='CourseCreationController')
+        .row
+            form
+                h2 Nuevo curso
+                label Título
+                input.form-control(type='text', required='', autofocus='', ng-model='course.title')
+                label FriendlyUrlName
+                input.form-control(type='text', required='', ng-model='course.friendlyUrlName')
+                label Categoría
+                select.form-control(ng-model='course.category', ng-options='category.name as category.name for category in bind.categories', required)
+
+                label Resumen del curso
+                div(text-angular, ng-model='course.description')
+
+                label Descripción corta
+                input.form-control(type='text', ng-model='course.shortDescription', required)
+
+                label Tags (separados por coma)
+                input.form-control(type='text', ng-model='course.tags', required)
+
+                label Instructor
+                select.form-control(ng-model='course.coachID', ng-options='coach._id as coach.name for coach in bind.coaches')
+
+                label Moneda
+                select.form-control(ng-model='course.currency', ng-options='key for (key, value) in bind.currencies', required)
+
+                label Precio
+                input.form-control(type='number', ng-model='course.price', required)
+
+                label Contador Falso
+                input.form-control(type='Number', ng-model='course.fakeCounter')
+
+                button.btn.btn-lg.btn-primary.btn-block(ng-click="save()", ng-hide="course._id") Crear
+                button.btn.btn-lg.btn-primary.btn-block(ng-click="update()", ng-show="course._id") Modificar

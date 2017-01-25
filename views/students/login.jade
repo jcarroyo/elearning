@@ -1,0 +1,17 @@
+extends layout
+block content
+    script(src='/js/controllers/students/studentLoginController.js')
+    script(src='/js/services/studentAccountService.js')
+    form.form-signin(ng-controller='StudentLoginController')
+        h2.form-signin-heading Iniciar sesión
+        label.sr-only(for='inputEmail') Correo
+        input#inputEmail.form-control(type='email', placeholder='Correo', required='', autofocus='', ng-model='account.email')
+        label.sr-only(for='inputPassword') Password
+        input#inputPassword.form-control(type='password', placeholder='Password', required='', ng-model='account.password')
+        .checkbox
+            label
+                input(type='checkbox', value='remember-me')
+                |  Recordarme
+        button.btn.btn-lg.btn-primary.btn-block(type='button', ng-click="login()") Login
+        a(href='/signup')
+            | Crear cuenta

@@ -1,0 +1,111 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+//http://jaketrent.com/post/environment-variables-in-node/
+var configFile = 'config-' + (process.env.NODE_ENV || '') + '.json';
+var nconf = require('nconf');
+nconf.argv()
+    .env()
+    .file('custom', './config/' + configFile);
+
+var app = require('../app');
+var http = require('http');
+var uuid = require('uuid');
+uuid.v4({random: nconf.get("uuidVector")}); //pending to check
+
+var mLogger = require('../libs/logger');
+var queueTasks = require('../libs/queueTasks');
+
+var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: nconf.get("cloudinary:cloud_name"),
+  api_key: nconf.get("cloudinary:api_key"),
+  api_secret: nconf.get("cloudinary:api_secret")
+});
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(nconf.get("web:port"));
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+
+  mLogger.error("Cannot start app", {error: error.toString()});
+
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  mLogger.info("app", "App started", {message: 'Listening on ' + bind});
+}

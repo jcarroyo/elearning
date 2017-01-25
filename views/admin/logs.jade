@@ -1,0 +1,33 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/logController.js')
+    script(src='/js/services/adminLogService.js')
+    div.container(ng-controller='LogController')
+        .row
+            select(ng-model='filter.level')
+                option(value='info') Info
+                option(value='warn') Warning
+                option(value='error') Error
+
+            table.table
+                thead
+                    th Tipo
+                    th Fecha
+                    th Mensaje
+                    th Datos
+                tbody
+                    tr(ng-repeat='log in logData.data')
+                        td {{log.level}}
+                        td {{log.timestamp}}
+                        td {{log.message}}
+                        td {{log.meta}}
+            nav
+                ul.pagination
+                    li
+                        a(href='#', arial-label="Previous", ng-click="previousPage()")
+                            span(aria-label="true") &laquo
+                        li(ng-repeat='page in logData.pages')
+                            a(href='#', ng-click="goPage(page)") {{page}}
+                        li
+                            a(href='#', arial-label="Next", ng-click="nextPage()")
+                                span(aria-label="true") &raquo

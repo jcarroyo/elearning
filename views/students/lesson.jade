@@ -1,0 +1,7 @@
+extends layout
+block content
+    script(src='/js/controllers/students/courseLessonController.js')
+    script(src='/js/services/courseService.js')
+    div.container(ng-controller='CourseLessonController')
+        h4 {{course.video.title}}
+        div(ng-bind-html='course.videoFrame')

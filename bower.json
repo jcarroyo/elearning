@@ -1,0 +1,17 @@
+{
+  "name": "elarning",
+  "private": "true",
+  "dependencies": {
+    "angular": "~1.4.2",
+    "angular-animate": "latest",
+    "angular-loading-bar": "latest",
+    "html5shiv": "~3.7.3",
+    "respond": "~1.4.2",
+    "jquery": "~1.11.1",
+    "underscore": "latest",
+    "bootstrap": "~3.3.6",
+    "textAngular": "latest",
+    "font-awesome": "latest",
+    "roboto-fontface": "latest"
+  }
+}

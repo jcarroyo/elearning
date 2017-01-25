@@ -1,0 +1,42 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/studentsController.js')
+    script(src='/js/services/adminStudentService.js')
+    script(src='/js/filters/studentStatus.js')
+    div.container(ng-controller='StudentsController')
+        .row
+            h1 Listado de alumnos
+            table.table
+                thead
+                    tr
+                        th Nombre
+                        th Fecha Creación
+                        th Estado
+                        th Último Login
+                        th Ver detalle
+                tbody
+                    tr(ng-repeat='student in data.students')
+                        td
+                            label {{student.name}}
+                        td
+                            label {{student.createdDate}}
+                        td
+                            label {{student.status | studentStatusName}}
+                        td
+                            label {{student.lastLogin}}
+                        td
+                            a(href='/admin/students/{{student._id}}')
+                                button.btn.btn-default(type='button', aria-label='Left Align')
+                                    span.glyphicon.glyphicon-user(aria-hidden='true')
+
+            nav
+                ul.pagination
+                    li
+                        a(href='#', arial-label="Previous", ng-click="previousPage()")
+                            span(aria-label="true") &laquo
+                    li(ng-repeat='page in data.pages')
+                        a(href='#', ng-click="goPage(page)") {{page}}
+                    li
+                        a(href='#', arial-label="Next", ng-click="nextPage()")
+                            span(aria-label="true") &raquo
+

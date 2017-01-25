@@ -1,0 +1,5 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/studentController.js')
+    script(src='/js/services/adminStudentService.js')
+    div.container(ng-controller='StudentController')

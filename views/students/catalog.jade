@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    link(href='css/shop-homepage.css', rel='stylesheet')
+    script(src='/js/controllers/students/catalogController.js')
+    script(src='/js/services/catalogService.js')
+    div.container(ng-controller='CatalogController')
+        .row
+            .col-md-3
+                p.lead Categorías
+                .list-group
+                    a.list-group-item(ng-click='categoryChange("")') TODAS
+                    a.list-group-item(ng-repeat='category in catalog.categories', ng-click='categoryChange(category.name)') {{category.name}}
+            .col-md-9
+                .row.carousel-holder
+                    .col-md-12
+                        #carousel-example-generic.carousel.slide(data-ride='carousel')
+                            ol.carousel-indicators
+                                li.active(data-target='#carousel-example-generic', data-slide-to='0')
+                                li(data-target='#carousel-example-generic', data-slide-to='1')
+                                li(data-target='#carousel-example-generic', data-slide-to='2')
+                            .carousel-inner
+                                .item.active
+                                    img.slide-image(src='http://placehold.it/800x300', alt='')
+                                .item
+                                    img.slide-image(src='http://placehold.it/800x300', alt='')
+                                .item
+                                    img.slide-image(src='http://placehold.it/800x300', alt='')
+                            a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
+                                span.glyphicon.glyphicon-chevron-left
+                            a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
+                                span.glyphicon.glyphicon-chevron-right
+                .row
+                    .col-sm-4.col-lg-4.col-md-4(ng-repeat='course in catalog.courses')
+                        .thumbnail
+                            //img(src='http://placehold.it/320x150', alt='')
+                            img(ng-src='{{course.images.smallImage.url}}')
+                            .caption
+                                h4
+                                    a(href='/course/{{course.friendlyUrlName}}') {{course.title}}
+                                p {{course.shortDescription}}
+                                h4 {{course.currency}} {{course.price}}
+                                p
+                                    span.glyphicon.glyphicon-star(ng-repeat='n in myRepeat(course.stars) track by $index')

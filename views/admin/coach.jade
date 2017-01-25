@@ -1,0 +1,38 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/coachController.js')
+    script(src='/js/services/adminCoachService.js')
+
+    div.container(ng-controller='CoachController')
+        ul.nav.nav-tabs
+            li.active
+                a(data-toggle='tab', href='#profileTab') Datos instructor
+            li(ng-if='coach._id != null')
+                a(data-toggle='tab', href='#imageTab') Imagen
+
+        div.tab-content
+            div#profileTab.tab-pane.fade.in.active
+                form
+                    h2(ng-if='coach._id == null') Nuevo Instructor
+                    h2(ng-if='coach._id != null') Instructor {{coach.name}}
+
+                    label Nombre instructor
+                    input.form-control(type='text', required, autofocus, ng-model='coach.name')
+
+                    label Biografía
+                    div(text-angular, ng-model='coach.bio')
+
+                    br
+                    button.btn.btn-lg.btn-primary.btn-block(ng-if='coach._id == null' ng-click="save()") Crear
+                    button.btn.btn-lg.btn-primary.btn-block(ng-if='coach._id != null' ng-click="update()") Editar
+            div#imageTab.tab-pane.fade
+                form(method='POST', action="{{'/admin/coach/' + coach._id + '/image'}}", enctype='multipart/form-data')
+                    label Imagen
+                    input.form-control(type='file', name='coachImage')
+                    div(ng-if='coach.image')
+                        label Imagen actual
+                        br
+                        img(ng-src="{{coach.image.url}}")
+
+                    button.btn.btn-lg.btn-primary.btn-block(type='submit') Subir imagen
+

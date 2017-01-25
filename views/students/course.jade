@@ -1,0 +1,30 @@
+extends layout
+block content
+    script(src='/js/controllers/students/courseController.js')
+    script(src='/js/services/courseService.js')
+    input#friendlyUrlName(type='hidden', value='#{friendlyUrlName}')
+    div.container(ng-controller='CourseController')
+        h2 {{course.title}}
+        img(ng-src='{{course.images.largeImage.url}}')
+        p {{course.shortDescription}}
+        p(ng-bind-html='course.description')
+
+        div(ng-repeat='section in course.sections')
+            h3 {{section.title}}
+            div(ng-repeat='lesson in section.lessons')
+                a(ng-if='course.payed', ng-href='/course/#{friendlyUrlName}/lesson/{{lesson._id}}') {{lesson.title}}
+                span(ng-if='!course.payed') {{lesson.title}}
+
+        div(ng-if='!course.payed')
+            button.btn.btn-primary(ng-if='isUserLogged()', type='button', ng-click="buy(course._id)") COMPRAR {{course.currency}}{{course.price}}
+            button.btn.btn-primary(ng-if='!isUserLogged()', data-toggle="modal", data-target="#login-modal") COMPRAR {{course.currency}}{{course.price}}
+
+
+        .row
+            .col-sm-6.col-md-4
+                h1 Instructor
+                .thumbnail
+                    img(ng-src='{{coach.image.url}}')
+                    .caption
+                        h3 {{coach.name}}
+                        p(ng-bind-html='coach.bio')

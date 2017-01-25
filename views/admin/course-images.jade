@@ -1,0 +1,12 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/courseImagesController.js')
+    div.container(ng-controller='CourseImagesController')
+        h2 Imágenes del curso
+        form(method='POST', action='/admin/create-course-images', enctype='multipart/form-data')
+            input(type='text', name='courseID', ng-model='course._id', style='display:none')
+            label Imagen grande (800x300)
+            input.form-control(type='file', name='largeImage')
+            label Imagen pequeña (320x150)
+            input.form-control(type='file', name='smallImage')
+            button.btn.btn-lg.btn-primary.btn-block(type='submit') ENVIAR

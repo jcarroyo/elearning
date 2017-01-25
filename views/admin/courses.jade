@@ -1,0 +1,48 @@
+extends layout
+block content
+    script(src='/js/controllers/admin/coursesController.js')
+    script(src='/js/services/adminCoursesService.js')
+    div.container(ng-controller='CoursesController')
+        .row
+            h1 Listado de cursos
+            label Categorías
+
+            select(ng-options='item.name as item.name for item in data.categories', ng-model='selectedCategory')
+                option(value="") Todas
+
+            a(href='/admin/create-course')
+                button.btn.btn-default(type='button') Nuevo curso
+
+            table.table
+                thead
+                    tr
+                        th Curso
+                        th Categoría
+                        th Estado
+                        th #Alumnos
+                        th Fecha creación
+                        th Acción
+                tbody
+                    tr(ng-repeat='course in data.courses')
+                        td
+                            a(href='/course/{{course.friendlyUrlName}}', target='_blank') {{course.title}}
+                        td
+                            label {{course.category}}
+                        td
+                            label {{course.status}}
+                        td
+                            label {{course.students}}
+                        td
+                            label {{course.creationDate}}
+                        td
+                            a(href='/admin/create-course?courseID={{course._id}}')
+                                button.btn.btn-default(type='button', aria-label='Left Align')
+                                    span.glyphicon.glyphicon-pencil(aria-hidden='true')
+                            a(href='/admin/create-course-content?courseID={{course._id}}')
+                                button.btn.btn-default(type='button', arial-label='Left Align')
+                                    span.glyphicon.glyphicon-th-list(aria-hidden='true')
+                            a(href='/admin/create-course-images?courseID={{course._id}}')
+                                button.btn.btn-default(type='button', arial-label='Left Align')
+                                    span.glyphicon.glyphicon-film(aria-hidden='true')
+                            button.btn.btn-default(type='button', arial-label='Left Align', ng-click="changeStatus(course)")
+                                span(aria-hidden='true', ng-class='{"glyphicon glyphicon-play": course.status == "draft", "glyphicon glyphicon-stop": course.status == "published"}')
